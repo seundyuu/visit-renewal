@@ -14,7 +14,11 @@ document.documentElement.classList.add('js');
   const MENU=[
     ['Main','./','home'],
     ['Business','business.html','business'],
-    ['Shop','shop.html','shop'],
+    ['Shop','shop.html','shop',[
+      ['Product','shop.html','shop'],
+      ['Tech','tech.html','tech'],
+      ['Store','store.html','store'],
+    ]],
     ['Newsroom','news.html','news'],
     ['Team','team.html','team'],
   ];
@@ -29,8 +33,20 @@ document.documentElement.classList.add('js');
 
   const page=()=>document.body.dataset.page||'';
   const put=html=>document.currentScript.insertAdjacentHTML('beforebegin',html);
-  const links=()=>{const p=page();return MENU.map(([t,h,k])=>
-    `<a href="${p==='home'&&k==='home'?'#top':h}"${p===k?' aria-current="page"':''}>${t}</a>`).join('');};
+  const cur=(on,attr)=>on?` aria-current="${attr}"`:'';
+  const href=(h,k)=>page()==='home'&&k==='home'?'#top':h;
+  // 데스크톱: 하위 메뉴는 hover/focus 드롭다운
+  const links=()=>{const p=page();return MENU.map(([t,h,k,sub])=>{
+    if(!sub)return `<a href="${href(h,k)}"${cur(p===k,'page')}>${t}</a>`;
+    const inSub=sub.some(s=>s[2]===p);
+    return `<div class="dd"><a href="${h}"${cur(inSub,'true')} aria-haspopup="true">${t}<svg class="car" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a><div class="dd-menu">${
+      sub.map(([st,sh,sk])=>`<a href="${sh}"${cur(p===sk,'page')}>${st}</a>`).join('')}</div></div>`;}).join('');};
+  // 모바일: 하위 메뉴를 항상 펼쳐서 표시
+  const mlinks=()=>{const p=page();return MENU.map(([t,h,k,sub])=>{
+    if(!sub)return `<a href="${href(h,k)}"${cur(p===k,'page')}>${t}</a>`;
+    const inSub=sub.some(s=>s[2]===p);
+    return `<div class="mgrp"><a href="${h}"${cur(inSub,'true')}>${t}</a><div class="msub">${
+      sub.map(([st,sh,sk])=>`<a href="${sh}"${cur(p===sk,'page')}>${st}</a>`).join('')}</div></div>`;}).join('');};
 
   window.VISIT={CONTACT,IR,
     header(){
@@ -46,7 +62,7 @@ document.documentElement.classList.add('js');
     <button class="burger" id="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mnav"><span></span></button>
   </div>
 </header>
-<nav class="mnav" id="mnav" aria-label="모바일 메뉴">${links()}</nav>`);
+<nav class="mnav" id="mnav" aria-label="모바일 메뉴">${mlinks()}</nav>`);
     },
     contact(){
       put(`<section class="sec contact" id="contact">

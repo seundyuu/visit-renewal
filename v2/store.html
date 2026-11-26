@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Store · VISIT x Insta360 · VISIT</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.crumb{display:inline-flex;gap:8px;align-items:center;font:500 14px var(--f-en);color:var(--t3);margin-bottom:6px}
+.crumb a:hover{color:var(--t1)}
+/* 히어로: 제품 사진 배경 카드 */
+.shero{position:relative;overflow:hidden;margin-top:28px;border-radius:28px;min-height:clamp(360px,42vw,520px);display:flex;align-items:flex-end;padding:clamp(28px,5vw,64px);color:#fff;background:#0a0a0a url(https://visitinc.kr/section1_bg.1b6323bd9fa490e8.png) center/cover;text-align:left}
+.shero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.1) 70%)}
+.shero>*{position:relative;z-index:1}
+.shero .brands{display:flex;align-items:center;gap:12px}
+.shero .brands img{height:clamp(16px,1.6vw,22px);width:auto}
+.shero .brands i{font-style:normal;opacity:.6}
+.shero h2{font-size:clamp(30px,4.4vw,56px);font-weight:700;line-height:1.25;letter-spacing:-.035em;margin-top:18px}
+@media (max-width:600px){.shero{background-image:url(https://visitinc.kr/section1_mo_bg.6547b498308ac0a3.png);background-position:center top;align-items:flex-end;min-height:440px}.shero::after{background:linear-gradient(0deg,rgba(0,0,0,.8),rgba(0,0,0,.05) 70%)}}
+/* 제휴 코드 */
+.code-wrap{max-width:720px;margin:0 auto;text-align:center}
+.code-wrap .h-xl .k{white-space:nowrap}
+.code{display:flex;align-items:center;justify-content:center;gap:12px;margin:40px auto 0;flex-wrap:wrap}
+.code output{display:inline-flex;align-items:center;justify-content:center;min-width:min(320px,100%);height:72px;padding:0 32px;border-radius:999px;background:#fff;border:1px solid var(--line2);box-shadow:0 12px 32px -14px rgba(0,0,0,.18);font:600 clamp(24px,3vw,30px) var(--f-en);letter-spacing:.32em;padding-left:calc(32px + .32em);color:#111}
+.code .btn{height:72px;border-radius:999px;padding:0 28px}
+.note{color:var(--t4);font-size:14px;margin-top:18px}
+.steps{margin-top:clamp(48px,6vw,72px)}
+.steps .card{text-align:left}
+.steps .card .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--s2);border:1px solid var(--line)}
+.steps .card .ico svg{width:24px;height:24px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* 제품 보러가기 */
+.prod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);align-items:center;gap:clamp(24px,5vw,72px);border-radius:28px;padding:clamp(32px,5vw,64px);background:radial-gradient(60% 80% at 75% 50%,#3d445a,#000009);color:#fff;overflow:hidden}
+.prod .eyebrow{color:#ff6a8a}
+.prod .lead{color:rgba(255,255,255,.72)}
+.prod img{width:min(360px,100%);margin:0 auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+.prod .btn-white{background:#fff;color:#111}
+.prod .btn-white:hover{background:#e9e9ea}
+@media (max-width:760px){.prod{grid-template-columns:1fr;text-align:center}.prod .acts{justify-content:center}.prod img{width:220px;grid-row:1}}
+</style>
+</head>
+<body class="lt" data-page="store">
+<script>VISIT.header()</script>
+<main id="top">
+  <section class="phero" style="padding-bottom:0">
+    <div class="wrap">
+      <p class="crumb"><a href="shop.html">Shop</a><span aria-hidden="true">/</span><span>Store</span></p>
+      <p class="eyebrow">Official Partner</p>
+      <h1>VISIT × <span class="en">Insta360</span><br><span class="k">공식 셀러</span></h1>
+      <div class="shero rv">
+        <div>
+          <div class="brands"><img src="https://visitinc.kr/assets/img/logo_white.png" alt="VISIT"><i>×</i><img src="https://visitinc.kr/insta_logo_white.363f0126ab2c49a0.png" alt="Insta360"></div>
+          <h2>비지트 x 인스타360<br>공식 셀러</h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tight">
+    <div class="wrap">
+      <div class="code-wrap rv">
+        <p class="eyebrow">Partner Code</p>
+        <h2 class="h-xl" style="margin-top:18px">VISIT 제휴 코드 입력 시<br>15일 내 <span class="k">리워드</span> 지급</h2>
+        <p class="lead" style="margin:20px auto 0">비지트의 공식 파트너 Insta360에서 코드를 입력하고 1% 리워드를 받으세요.</p>
+        <div class="code">
+          <output id="pcode" aria-label="제휴 코드">INRIEIY</output>
+          <button class="btn btn-white" type="button" id="copy">코드 복사</button>
+        </div>
+        <p class="note">*제품 수령 확인 메일 발송 시 지급</p>
+      </div>
+      <div class="grid g3 steps">
+        <div class="card rv"><span class="ico"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></span><span class="num" style="display:block;margin-top:20px">STEP 01</span><h3>제휴 코드 복사</h3><p>위의 VISIT 제휴 코드를 복사해 주세요.</p></div>
+        <div class="card rv"><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg></span><span class="num" style="display:block;margin-top:20px">STEP 02</span><h3>Insta360 스토어에서 구매</h3><p>결제할 때 제휴 코드를 입력해 주세요.</p></div>
+        <div class="card rv"><span class="ico"><svg viewBox="0 0 24 24"><path d="M20 12v8H4v-8"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span><span class="num" style="display:block;margin-top:20px">STEP 03</span><h3>15일 내 1% 리워드</h3><p>제품 수령 확인 메일이 발송되면 리워드를 지급해요.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tight" style="padding-top:0">
+    <div class="wrap">
+      <div class="prod rv">
+        <div>
+          <p class="eyebrow">Insta360 × VISIT</p>
+          <h2 class="h-xl" style="margin-top:18px">Insta360 비지트<br>제휴 제품을 바로 만나보세요.</h2>
+          <p class="lead" style="margin-top:18px">아래 버튼을 누르면 Insta360 공식 스토어의 제휴 제품 페이지로 이동해요.</p>
+          <div class="acts"><a class="btn btn-white" href="https://store.insta360.com/product/x5" target="_blank" rel="noopener">제품 보러가기 <span class="arr">→</span></a></div>
+        </div>
+        <img src="https://visitinc.kr/camera.e23c301e51528ef8.png" alt="Insta360 카메라" loading="lazy">
+      </div>
+    </div>
+  </section>
+  <script>VISIT.contact()</script>
+</main>
+<script>VISIT.footer()</script>
+<script>
+document.getElementById('copy').addEventListener('click',async e=>{
+  const b=e.currentTarget,code=document.getElementById('pcode').textContent;
+  try{await navigator.clipboard.writeText(code);b.textContent='복사됨 ✓';}
+  catch{b.textContent=code;}
+  setTimeout(()=>b.textContent='코드 복사',1800);
+});
+</script>
+</body>
+</html>
