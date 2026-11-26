@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Team · VISIT</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="common.css">
+<script src="common.js"></script>
+<style>
+.culture{list-style:none;margin:0;padding:0}
+.crow{display:grid;grid-template-columns:80px minmax(0,1fr) 180px;gap:clamp(20px,4vw,56px);align-items:center;padding:clamp(28px,4vw,44px) 0;border-top:1px solid var(--line)}
+.crow:first-child{border-top:0;padding-top:0}
+.crow .num{font:600 clamp(28px,3vw,40px) var(--f-en);color:var(--accent);letter-spacing:-.02em}
+.crow h3{font-size:clamp(20px,2.4vw,28px);font-weight:700;letter-spacing:-.03em;line-height:1.35}
+.crow p{color:var(--t3);font-size:15px;line-height:1.75;margin-top:12px;max-width:62ch}
+.crow img{width:180px;height:auto;justify-self:end;opacity:.95}
+@media (max-width:760px){.crow{grid-template-columns:1fr;gap:12px}.crow img{grid-row:1;justify-self:start;width:120px}}
+.person{margin:0;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.person blockquote{margin:0;color:var(--t2);font-size:15px;line-height:1.8}
+.person figcaption{display:flex;gap:10px;align-items:baseline;padding-top:18px;border-top:1px solid var(--line)}
+.person b{font-size:17px}.person span{color:var(--t4);font-size:14px}
+.jobs a,.jobs .closed{display:grid;grid-template-columns:80px 1fr 20px;gap:20px;align-items:center;padding:20px 24px;border-top:1px solid var(--line)}
+.jobs li:first-child>*{border-top:0}
+.jobs .closed{color:var(--t4)}
+.jobs .tt{font-size:16px;font-weight:700;color:var(--t1)}
+.jobs .closed .tt{color:var(--t3)}
+.jobs .tt small{display:block;font-size:13px;font-weight:500;color:var(--t4);margin-top:4px}
+.jobs .st{justify-self:start;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--grad);color:#fff}
+.jobs .st.off{background:rgba(255,255,255,.08);color:var(--t4)}
+@media (max-width:600px){.jobs a,.jobs .closed{grid-template-columns:1fr 16px;gap:8px 12px;padding:18px}.jobs .st{grid-column:1/-1}}
+.card h3 small{font:500 13px var(--f-en);color:var(--t4);margin-left:6px}
+.notes{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:6px;color:var(--t4);font-size:13px;text-align:center}
+#coffee{padding-bottom:clamp(40px,6vw,80px)}
+</style>
+</head>
+<body data-page="team">
+<script>VISIT.header()</script>
+<main id="top">
+<section class="phero">
+    <div class="wrap">
+      <p class="eyebrow">Culture</p>
+      <h1>비지트에서<br>일하는 방식</h1>
+      <p class="lead">비지트가 추구하는 가치와 함께 성장할 당신을 기다리고 있습니다.</p>
+      <div class="acts"><a class="btn btn-white" href="#recruit">채용 공고 보기 <span class="arr">↓</span></a><a class="btn btn-glass" href="#coffee">커피챗 신청 <span class="arr">→</span></a></div>
+    </div>
+  </section>
+
+  <section class="sec tight line">
+    <div class="wrap">
+      <ul class="culture">
+<li class="crow rv"><span class="num">01</span><div><h3>신뢰를 바탕으로 일해요.</h3><p>구성원 개개인의 직무 전문성을 존중합니다. 서로에게 약속한 규칙과 기한을 지켜 같은 방향으로 나아가고 있다는 것을 신뢰합니다. 이는 자유로운 소통과 뛰어난 성장의 원동력이 됩니다.</p></div><img src="https://visitinc.kr/assets/img/team/culture_1.png" alt="" loading="lazy"></li>
+<li class="crow rv"><span class="num">02</span><div><h3>지속 가능한 도전을 계속해요.</h3><p>논리와 지식을 기반으로 원인과 방안을 찾습니다. 생산적인 토론은 지속적인 도전을 가능하게 합니다. 더불어 일과 생활의 균형과 건강한 문화를 만들고, 어제의 구성원들과 내일도 함께 나아갑니다.</p></div><img src="https://visitinc.kr/assets/img/team/culture_2.png" alt="" loading="lazy"></li>
+<li class="crow rv"><span class="num">03</span><div><h3>실패를 두려워하지 않고 소통해요.</h3><p>새로운 것에 용기를 내어 의견을 제시합니다. 시행착오의 과정을 받아들이고 이야기하며, 발전하는 서로를 응원합니다. 명확한 전달 방식으로 구성원 모두의 시간과 에너지를 효율적으로 사용합니다.</p></div><img src="https://visitinc.kr/assets/img/team/culture_3.png" alt="" loading="lazy"></li>
+<li class="crow rv"><span class="num">04</span><div><h3>자율적으로 결단하고, 책임감을 가져요.</h3><p>전사적인 목표에 맞춰 담당자로서의 업무와 역할을 찾아냅니다. 작은 요소도 구체적으로 이해하고, 무한한 수용보다는 자율적으로 결단합니다. 도출된 최종 결과물에 책임 의식을 가집니다.</p></div><img src="https://visitinc.kr/assets/img/team/culture_4.png" alt="" loading="lazy"></li>
+<li class="crow rv"><span class="num">05</span><div><h3>정보를 투명하게 공유해요.</h3><p>빠르게 전달되는 팩트로 모두가 실시간으로 대응하고 소통합니다. 원인을 알고, 불필요한 일과 필요한 일을 구분하는 데이터를 쌓아 나갑니다. 이것이 우리의 전략적인 의사결정을 만듭니다.</p></div><img src="https://visitinc.kr/assets/img/team/culture_5.png" alt="" loading="lazy"></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec tight line">
+    <div class="wrap">
+      <div class="sec-head rv"><p class="eyebrow">Support & Benefit</p><h2 class="h-xl">비지트 구성원들의<br>성장을 위해</h2></div>
+      <div class="grid g3">
+<div class="card rv"><h3>건강하고 행복한 삶을 만들어요.</h3><ul class="checks" style="margin-top:18px"><li>생일 반차</li><li>식대 지원</li><li>창립기념일 휴무</li><li>경조사비</li><li>임신 및 출산 관련 휴가</li><li>연 2회 명절 선물</li><li>생산성 격려금</li><li>직원 대출 제도</li></ul></div>
+<div class="card rv"><h3>자율을 보장하고, 존중받는 업무 환경을 제공해요.</h3><ul class="checks" style="margin-top:18px"><li>시차 출퇴근제 운영</li><li>주 37시간 근무</li><li>첫해 포함 매년 최소 15일의 휴가</li><li>구성원 전체 ‘님’ 호칭 통일</li><li>자율 복장</li><li>주 1회 원격 근무</li><li>비동기 소통</li></ul></div>
+<div class="card rv"><h3>몰입하고 성장할 수 있도록 지원해요.</h3><ul class="checks" style="margin-top:18px"><li>사용자별 맞춤 기기 및 비용 지원</li><li>주차 공간</li><li>음료 및 다과</li><li>직무 관련 사내 스터디 운영</li><li>도서 구입비 및 교육비</li><li>세미나 및 컨퍼런스 참가비</li><li>스톡옵션 포상</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tight line">
+    <div class="wrap">
+      <div class="sec-head rv"><p class="eyebrow">People</p><h2 class="h-xl">가슴 뛰는 도전으로<br>성장하는 우리</h2></div>
+      <div class="grid g3">
+<figure class="card person rv"><blockquote>비지트는 사람들이 만나고 경험을 공유하는 장입니다. 개인이 팀을 특별하게 만들며, 협력과 개방성, 지속적 학습을 중시합니다. 공간의 가치를 새롭게 발견하고, 더 연결된 세상을 만드는 것이 목표입니다.</blockquote><figcaption><b>조용원</b><span>CEO</span></figcaption></figure>
+<figure class="card person rv"><blockquote>자유와 책임 속에서 함께하는 가치를 느낄 수 있는 곳이라고 생각합니다. 원팀! 원골!로 모두 하나가 되어 나아갈 수 있도록 끊임없이 노력하는 회사라고 말하고 싶네요 :-)</blockquote><figcaption><b>엄태인</b><span>엔지니어</span></figcaption></figure>
+<figure class="card person rv"><blockquote>비지트는 협력과 소통을 기반으로 공간 콘텐츠를 만듭니다. 팀원들과 긴밀히 협업하여 기술적 장벽을 극복하고, 사용자 중심 솔루션을 제공합니다.</blockquote><figcaption><b>이건희</b><span>엔지니어</span></figcaption></figure>
+<figure class="card person rv"><blockquote>의견을 주의 깊게 듣고, 발전을 위해 노력하는 구성원들로 이루어진 조직입니다. 함께 성장하며 아이디어를 만들고 효율적인 업무 결과를 내며 지역사회와 함께 성장합니다.</blockquote><figcaption><b>김수연</b><span>CEO-staff</span></figcaption></figure>
+<figure class="card person rv"><blockquote>팀워크를 경험하며 서비스 발전을 함께 연구할 수 있는 곳입니다. 디자인뿐만 아니라 다양한 직무의 동료들과 협업 경험을 얻을 수 있어요.</blockquote><figcaption><b>이재은</b><span>디자이너</span></figcaption></figure>
+<figure class="card person rv"><blockquote>열정 있는 팀원들과 함께 즐겁게 일할 수 있어요! 주도적으로 업무를 담당하는 경험을 통해 빠르게 성장할 수 있습니다 :)</blockquote><figcaption><b>장승주</b><span>디자이너</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tight line" id="recruit">
+    <div class="wrap">
+      <div class="sec-head rv"><p class="eyebrow">Recruiting</p><h2 class="h-xl">비지트와 함께해 주실<br>인재를 기다립니다.</h2></div>
+      <ul class="nlist jobs rv">
+<li><a href="https://visit-inc.notion.site/BE-33dfa1abe2508097804ad9849f289477?source=copy_link" target="_blank" rel="noopener"><span class="st">채용 중</span><span class="tt">PM Lead<small>서울 · 경력 · 정규직 · 기업부설연구소 · 5년 이상 · 포트폴리오</small></span><span class="ar">→</span></a></li>
+<li><div class="closed"><span class="st off">마감</span><span class="tt">FE/React Native 하이브리드 앱 개발자<small>서울 · 경력 · 정규직·계약직 · 기업부설연구소 · 3년 이상</small></span><span class="ar"></span></div></li>
+<li><div class="closed"><span class="st off">마감</span><span class="tt">CTO<small>서울 · 경력 · 정규직·계약직 · 기업부설연구소 · 1년 이상</small></span><span class="ar"></span></div></li>
+<li><div class="closed"><span class="st off">마감</span><span class="tt">AI 엔지니어 인턴<small>서울 · 신입 · 인턴 · 기업부설연구소</small></span><span class="ar"></span></div></li>
+      </ul>
+      <h3 class="h-lg rv" style="text-align:center;margin:clamp(64px,8vw,96px) 0 32px">채용 절차</h3>
+      <div class="grid g4">
+<div class="card rv"><span class="num">STEP 01</span><h3>서류 전형</h3><p>채용 공고는 채용 플랫폼과 회사 홈페이지에 게시됩니다.</p></div>
+<div class="card rv"><span class="num">STEP 02</span><h3>1차 면접 <small>Online</small></h3><p>온라인으로 진행하며, 임원진과의 대화로 조직 문화 적합성을 살펴봅니다.</p></div>
+<div class="card rv"><span class="num">STEP 03</span><h3>2차 면접 <small>On-site</small></h3><p>지원한 직무의 실무진과 만나 경험과 경력을 바탕으로 실무 역량을 확인합니다.</p></div>
+<div class="card rv"><span class="num">STEP 04</span><h3>최종 합격</h3><p>입사일 확정과 연봉 협상이 이뤄집니다.</p></div>
+      </div>
+      <ul class="notes rv">
+        <li>모든 제출 서류는 채용 과정 이후 파기되며, 사실과 다를 경우 채용이 취소됩니다.</li>
+        <li>서류 전형은 영업일 기준 최대 10일이 소요됩니다.</li>
+        <li>포지션에 따라 코딩 테스트 등의 과정이 추가될 수 있습니다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap" id="coffee">
+    <div class="team-card rv">
+      <div><p class="eyebrow">Coffee Chat</p><h2 class="h-xl" style="margin-top:18px">우리의 문화를<br>나누고자 합니다.</h2>
+      <p class="lead" style="margin:20px auto 0">커피 한 잔의 시간 동안 부담 없이 경험과 인사이트를 나눠요. 비지트의 가치와 비전에 공감하는 분들을 기다립니다.</p></div>
+      <a class="btn btn-white" href="https://visitinc.kr/coffeechat">커피챗 신청하기 <span class="arr">→</span></a>
+    </div>
+  </section>
+  <script>VISIT.contact()</script>
+</main>
+<script>VISIT.footer()</script>
+</body>
+</html>
