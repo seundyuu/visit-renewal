@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VISIT 리뉴얼 시안 v2</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@egjs/view360@4.0.0-beta.7/css/view360.min.css">
+<style>
+/* =========================================================
+   VISIT 리뉴얼 v2 — 다크 디자인 시스템
+   · 블랙 베이스 + 화이트 텍스트 투명도 단계(96/72/56/40)
+   · 좁은 자간의 굵은 헤드라인, 포인트 컬러는 VISIT 레드
+   · 컴포넌트: 8~18px 라운드 버튼 / 세그먼트 탭 / 제품 목업 창 / 다크 카드
+   · 섹션 순서와 문구는 기존 VISIT 홈페이지 기준
+   ========================================================= */
+:root{
+  --bg:#000;
+  --s1:#0c0c0d;            /* 카드 */
+  --s2:#141416;            /* 카드 hover / 목업 내부 */
+  --s3:#1c1c1f;
+  --line:rgba(255,255,255,.08);
+  --line2:rgba(255,255,255,.14);
+  --t1:rgba(255,255,255,.96);
+  --t2:rgba(255,255,255,.72);
+  --t3:rgba(255,255,255,.56);
+  --t4:rgba(255,255,255,.40);
+  --accent:#ff2e5f;        /* VISIT 레드를 검정 위에서 읽히게 살짝 밝힘 */
+  --red:#ff004d;
+  --grad:linear-gradient(140deg,#ff023f 31%,#ff2b38 53%,#ff4535 73%,#ff8038 89%,#ffb890 97%);
+  --f-kr:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo",system-ui,sans-serif;
+  --f-en:Poppins,"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  --maxw:1200px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--t1);font-family:var(--f-kr);font-size:16px;font-weight:500;line-height:1.65;word-break:keep-all;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:max(20px,env(safe-area-inset-left,0px))}
+.k{color:var(--accent)}                     /* 포인트 키워드 */
+.en{font-family:var(--f-en)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:-.01em;border-radius:12px;padding:0 22px;height:50px;border:0;cursor:pointer;transition:background .2s,transform .2s,filter .2s;white-space:nowrap}
+.btn:active{transform:scale(.98)}
+.btn-sm{height:34px;padding:0 14px;font-size:13px;border-radius:8px}
+.btn-lg{height:64px;padding:0 36px;font-size:16px;border-radius:18px}
+.btn-white{background:#fff;color:#111}
+.btn-white:hover{background:#e9e9ea}
+.btn-glass{background:rgba(255,255,255,.12);color:#fff}
+.btn-glass:hover{background:rgba(255,255,255,.2)}
+.btn-accent{background:var(--grad);color:#fff}
+.btn-accent:hover{filter:brightness(1.08)}
+.btn .arr{transition:transform .2s}
+.btn:hover .arr{transform:translateX(3px)}
+
+/* ---------- Header ---------- */
+.hdr{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.hdr.solid{background:rgba(0,0,0,.78);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-color:var(--line)}
+.hdr .wrap{display:flex;align-items:center;height:60px;gap:36px;max-width:1360px}
+.logo img{height:22px;width:auto}
+.nav{display:flex;gap:2px;flex:1}
+.nav a{font:600 14px var(--f-kr);color:var(--t2);padding:8px 12px;border-radius:8px;transition:color .2s,background .2s}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.hdr-cta{display:flex;gap:8px;align-items:center}
+.burger{display:none;width:40px;height:40px;border-radius:10px;border:0;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;place-items:center;margin-left:auto}
+.burger span,.burger span::before,.burger span::after{display:block;width:16px;height:1.5px;background:currentColor;position:relative;transition:transform .25s,background .25s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+.menu-open .burger span{background:transparent}
+.menu-open .burger span::before{transform:translateY(5px) rotate(45deg)}
+.menu-open .burger span::after{transform:translateY(-5px) rotate(-45deg)}
+.mnav{display:none}
+@media (max-width:900px){
+  .nav,.hdr-cta .btn-glass{display:none}
+  .hdr-cta{margin-left:auto}
+  .hdr .wrap{gap:12px}
+  .burger{display:grid;margin-left:0}
+  .mnav{display:flex;flex-direction:column;position:fixed;inset:0;z-index:40;background:#000;padding:calc(env(safe-area-inset-top,0px) + 84px) 20px 40px;opacity:0;visibility:hidden;transition:.25s}
+  .menu-open .mnav{opacity:1;visibility:visible}
+  .mnav a{font-size:24px;font-weight:700;letter-spacing:-.02em;padding:14px 0;border-bottom:1px solid var(--line)}
+}
+
+/* ---------- Hero: 360 뷰어 + 좌하단 정렬 (기존 VISIT 구성 유지) ---------- */
+.hero{position:relative;height:max(640px,100svh);overflow:hidden;background:#000 url(../assets/img/main/main.jpg) center/cover}
+#pano{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+#pano.ready{opacity:1}
+#pano canvas{width:100%;height:100%;display:block}
+.hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 42% at 50% 50%,rgba(0,0,0,.72),rgba(0,0,0,.35) 60%,transparent 85%),
+    linear-gradient(180deg,rgba(0,0,0,.6) 0,rgba(0,0,0,.15) 20%,rgba(0,0,0,.15) 62%,#000 100%)}
+.hero-veil::after{content:"";position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+/* 가운데 정렬 히어로 */
+.hero-in{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 20px 120px;pointer-events:none}
+.hero-in>*{text-shadow:0 2px 24px rgba(0,0,0,.45)}
+.hero h1{font-size:clamp(38px,6vw,76px);font-weight:700;line-height:1.2;letter-spacing:-.04em;color:var(--t1)}
+.hero h1 em{font-style:normal;font-family:var(--f-en);font-weight:600;letter-spacing:-.02em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{margin-top:22px;font-size:clamp(15px,1.3vw,17px);color:var(--t2);line-height:1.7}
+.hero-ctas{display:flex;gap:10px;margin-top:36px;pointer-events:auto;flex-wrap:wrap;justify-content:center}
+.hero-ctas .btn{text-shadow:none}
+/* 세그먼트 탭 — 히어로 공간 선택과 About 탭에서 같이 씀 */
+.seg{display:inline-flex;gap:4px;padding:4px;border-radius:12px;background:rgba(20,20,22,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line2);max-width:100%;pointer-events:auto}
+.seg button{flex:none;font:600 13px var(--f-kr);color:var(--t3);background:transparent;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;transition:color .25s,background .25s;white-space:nowrap}
+.seg button:hover{color:#fff}
+.seg button[aria-pressed="true"],.seg button[aria-selected="true"]{background:#fff;color:#111}
+.scenes{position:absolute;z-index:3;left:0;right:0;margin-inline:auto;width:max-content;max-width:calc(100% - 32px);bottom:36px}
+.hud{position:absolute;z-index:3;top:calc(env(safe-area-inset-top,0px) + 84px);right:max(20px,env(safe-area-inset-right,0px));font:500 11px var(--f-en);letter-spacing:.12em;color:var(--t3);text-align:right;pointer-events:none;line-height:1.8}
+.hud b{display:block;color:#fff;font-size:18px;font-weight:500;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.hud .live{color:var(--accent);display:inline-flex;gap:6px;align-items:center}
+.hud .live::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.25}}
+.hint{position:absolute;z-index:3;left:50%;top:26%;transform:translate(-50%,-50%);font:500 13px var(--f-kr);color:#fff;padding:8px 14px;border-radius:8px;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);pointer-events:none;transition:opacity .6s;white-space:nowrap}
+.hint.gone{opacity:0}
+@media (max-width:640px){.hud{display:none}.scenes{bottom:24px}.hint{top:auto;bottom:84px;transform:translateX(-50%)}.seg button{padding:8px 11px}}
+@media (max-width:360px){.seg button{padding:7px 9px;font-size:12px}}
+
+/* ---------- Logo strip: 히어로 바로 아래 흑백 로고 띠 ---------- */
+.logos{border-block:1px solid var(--line);padding:26px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.logos .row{display:flex;gap:64px;width:max-content;animation:mq 36s linear infinite;align-items:center}
+.logos img{height:34px;width:auto;filter:grayscale(1) brightness(0) invert(1);opacity:.5;transition:opacity .2s}
+.logos img:hover{opacity:.9}
+@media (prefers-reduced-motion:reduce){.logos .row{animation:none}}
+
+/* ---------- Section rhythm ---------- */
+.sec{padding-block:clamp(96px,12vw,170px);position:relative}
+.h-xl{font-size:clamp(30px,4.2vw,54px);font-weight:700;line-height:1.25;letter-spacing:-.035em}
+.lead{color:var(--t2);font-size:clamp(16px,1.35vw,18px);line-height:1.75;max-width:62ch}
+.eyebrow{font:500 14px var(--f-en);color:var(--accent);letter-spacing:.02em}
+.more{font:500 14px var(--f-en);display:inline-flex;gap:8px;align-items:center;color:var(--t2);transition:color .2s}
+.more:hover{color:#fff}
+.more span{transition:transform .2s}.more:hover span{transform:translateX(3px)}
+.sec-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)}
+
+/* ---------- We're: 좌 헤드라인 / 우 본문 + 점 파형 배경 ---------- */
+.were{overflow:hidden;background:#000 url(../assets/img/main/main_2.png) right center/cover no-repeat}
+.were::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000 20%,rgba(0,0,0,.5) 70%,rgba(0,0,0,.2))}
+.were .wrap{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,96px);align-items:end}
+.were .lead+.lead{margin-top:16px}
+@media (max-width:860px){.were .wrap{grid-template-columns:1fr}}
+
+/* ---------- About: 탭으로 Business / Service / Technology 전환 ---------- */
+.about-panels{position:relative}
+.ap{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:center}
+.ap[hidden]{display:none}
+.ap.show{animation:apIn .6s var(--ease)}
+@keyframes apIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ap.show{animation:none}}
+.ap .tag{font:500 14px var(--f-en);color:var(--accent)}
+.ap h3{font-size:clamp(24px,2.4vw,32px);font-weight:700;letter-spacing:-.03em;line-height:1.3;margin-top:12px}
+.ap .desc{color:var(--t3);font-size:16px;line-height:1.75;margin-top:16px}
+.pts{list-style:none;margin:28px 0 28px;padding:0;border-top:1px solid var(--line)}
+.pts li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;padding:16px 0;border-bottom:1px solid var(--line)}
+.pts .ic{width:40px;height:40px;border-radius:10px;background:var(--s2);border:1px solid var(--line);display:grid;place-items:center}
+.pts svg{width:20px;height:20px;stroke:var(--t1);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pts b{display:block;font-size:15px;font-weight:700}
+.pts span{display:block;font-size:14px;color:var(--t3);margin-top:2px}
+@media (max-width:900px){.ap{grid-template-columns:1fr}.ap .mock{order:-1}}
+/* 제품 목업 창 */
+.mock{position:relative}
+.win{position:relative;border-radius:20px;border:1px solid var(--line2);background:linear-gradient(180deg,#151517,#0b0b0c);padding:12px;box-shadow:0 40px 120px -40px rgba(255,0,77,.25),0 0 0 1px rgba(0,0,0,.6)}
+.win-bar{display:flex;align-items:center;gap:10px;padding:4px 6px 12px}
+.win-bar i{width:10px;height:10px;border-radius:50%;background:#2a2a2d}
+.win-bar .chip{margin-left:auto}
+.win-body{border-radius:12px;overflow:hidden;aspect-ratio:16/10;background:#000}
+.win-body img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.mock:hover .win-body img{transform:scale(1.03)}
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 12px var(--f-kr);color:var(--t2);background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:8px;padding:5px 10px;white-space:nowrap}
+.chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.chip.ok .dot{background:#3ddc84}
+.float{position:absolute;z-index:2;width:min(260px,46%);border-radius:16px;border:1px solid var(--line2);background:rgba(18,18,20,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:16px 18px;box-shadow:0 24px 60px rgba(0,0,0,.6);left:-24px;bottom:-28px}
+.float .t{font-size:12px;color:var(--t3);font-weight:600}
+.float .v{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums}
+.float .v small{font-size:13px;color:var(--t3);font-weight:600;margin-left:4px}
+.float .bar{height:6px;border-radius:6px;background:rgba(255,255,255,.08);margin-top:12px;overflow:hidden}
+.float .bar span{display:block;height:100%;width:var(--w,60%);background:var(--grad);border-radius:inherit}
+.float ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.float li{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--t2)}
+.float li b{color:var(--t1);font-weight:600;font-family:var(--f-en)}
+@media (max-width:1100px){.float{left:16px;bottom:16px}}
+@media (max-width:560px){.float{position:relative;left:auto;bottom:auto;width:auto;margin-top:12px}}
+
+
+/* ---------- Growth: 벤토 숫자 카드 ---------- */
+.bento{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px;margin-top:clamp(56px,7vw,88px)}
+.stat{position:relative;overflow:hidden;border-radius:20px;background:var(--s1);border:1px solid var(--line);padding:28px;min-height:210px;display:flex;flex-direction:column}
+.stat .lbl{font-size:14px;color:var(--t3);font-weight:600}
+.stat .v{margin-top:auto;font:600 clamp(40px,4.4vw,60px)/1.05 var(--f-en);letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.stat .v small{font-family:var(--f-kr);font-size:.38em;font-weight:700;margin-left:4px;letter-spacing:0;color:var(--t2)}
+.stat .v.kr{font-family:var(--f-kr);font-weight:800}
+.stat .d{font-size:12px;color:var(--t4);margin-top:10px;font-family:var(--f-en)}
+.stat.hero-stat{grid-row:span 2;min-height:436px;background:#050505 radial-gradient(rgba(255,255,255,.1) 1px,transparent 1.3px) center/14px 14px}
+.stat.hero-stat::after{content:"";position:absolute;right:-25%;bottom:-35%;width:85%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,0,77,.42),transparent 65%);pointer-events:none}
+.stat.hero-stat .v{font-size:clamp(60px,7vw,108px);background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;position:relative;z-index:1}
+.stat.hero-stat .v small{-webkit-text-fill-color:var(--t2)}
+.stat.wide{grid-column:span 2}
+@media (max-width:860px){.bento{grid-template-columns:1fr 1fr}.stat.hero-stat{grid-row:auto;grid-column:span 2;min-height:260px}.stat{min-height:170px;padding:22px}}
+
+.reach{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px;margin-top:16px}
+.panel{border-radius:20px;background:var(--s1);border:1px solid var(--line);padding:28px}
+.panel-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.panel-h h3{font-size:17px;font-weight:700}
+.map svg{width:100%;height:auto}
+.map .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s cubic-bezier(.6,0,.2,1)}
+.map .draw+.draw{transition-delay:.4s}
+.map.in .draw{stroke-dashoffset:0}
+.tl{list-style:none;margin:0;padding:0 0 0 26px;position:relative;max-height:520px;overflow:auto;scrollbar-width:thin;scrollbar-color:#333 transparent}
+.tl::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line2)}
+.tl>li{position:relative;display:grid;grid-template-columns:64px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.tl>li:first-child{border-top:0}
+.tl>li::before{content:"";position:absolute;left:-25px;top:22px;width:9px;height:9px;border-radius:50%;background:#000;border:1.5px solid var(--t4)}
+.tl>li:first-child::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px rgba(255,46,95,.18)}
+.tl .y{font:600 17px var(--f-en);color:var(--t1);font-variant-numeric:tabular-nums}
+.tl ul{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.tl ul li{font-size:14px;color:var(--t3)}
+@media (max-width:860px){.reach{grid-template-columns:1fr}}
+
+/* ---------- Newsroom ---------- */
+.sec-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:48px}
+.ncards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ncard{display:flex;flex-direction:column;border-radius:20px;overflow:hidden;background:var(--s1);border:1px solid var(--line);transition:background .3s,border-color .3s,transform .3s var(--ease)}
+.ncard:hover{background:var(--s2);border-color:var(--line2);transform:translateY(-4px)}
+.ncard .th{aspect-ratio:16/10;overflow:hidden;background:#111}
+.ncard .th img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.ncard:hover .th img{transform:scale(1.04)}
+.ncard .bd{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px}
+.ncard .meta{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--t4);font-family:var(--f-en)}
+.ncard h3{font-size:17px;font-weight:700;line-height:1.5;letter-spacing:-.015em}
+.nlist{list-style:none;margin:16px 0 0;padding:0;border-radius:20px;background:var(--s1);border:1px solid var(--line);overflow:hidden}
+.nlist a{display:grid;grid-template-columns:110px 1fr 20px;gap:20px;align-items:center;padding:18px 24px;border-top:1px solid var(--line);transition:background .2s}
+.nlist li:first-child a{border-top:0}
+.nlist a:hover{background:var(--s2)}
+.nlist .dt{font:500 13px var(--f-en);color:var(--t4);font-variant-numeric:tabular-nums}
+.nlist .tt{font-size:15px;color:var(--t2);font-weight:600}
+.nlist a:hover .tt{color:#fff}
+.nlist .ar{color:var(--t4)}
+@media (max-width:900px){.ncards{grid-template-columns:1fr}.ncard{flex-direction:row}.ncard .th{flex:0 0 38%;aspect-ratio:auto}.ncard .bd{padding:16px}}
+@media (max-width:600px){.nlist a{grid-template-columns:1fr 16px;gap:2px 12px;padding:16px}.nlist .dt{grid-column:1/-1}}
+
+/* ---------- Team ---------- */
+.team-card{position:relative;overflow:hidden;border-radius:28px;border:1px solid var(--line);padding:clamp(36px,6vw,72px);display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;background:#000 url(../assets/img/main/main_11.jpg) center/cover}
+.team-card::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.15))}
+.team-card>*{position:relative;z-index:1}
+@media (max-width:760px){.team-card{grid-template-columns:1fr}}
+
+/* ---------- Reference: 두 줄 로고 마퀴 ---------- */
+.ref{overflow:hidden}
+.marq{display:flex;flex-direction:column;gap:12px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marq .row{display:flex;gap:12px;width:max-content;animation:mq 40s linear infinite}
+.marq .row.rev{animation-direction:reverse;animation-duration:48s}
+.marq:hover .row{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marq .row{animation:none}.marq{overflow-x:auto}}
+.logo-chip{flex:none;height:96px;width:240px;padding:18px 28px;display:grid;place-items:center;border-radius:16px;background:var(--s1);border:1px solid var(--line);transition:background .3s,border-color .3s}
+.logo-chip img{max-height:52px;width:auto;filter:grayscale(1) brightness(0) invert(1);opacity:.55;transition:opacity .3s}
+.logo-chip:hover{background:var(--s2);border-color:var(--line2)}
+.logo-chip:hover img{opacity:.95}
+
+/* ---------- Contact: 큰 메일 주소 + 주소 패널 ---------- */
+.contact{overflow:hidden}
+.contact::before{content:"";position:absolute;left:-10%;bottom:-50%;width:min(900px,120%);aspect-ratio:2/1;background:radial-gradient(ellipse at center,rgba(255,0,77,.22),rgba(255,128,56,.06) 45%,transparent 70%);pointer-events:none}
+.contact .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(40px,6vw,96px);align-items:start}
+.mail{display:inline-block;font:500 clamp(28px,4vw,52px)/1.3 var(--f-en);letter-spacing:-.01em;margin:18px 0 32px;overflow-wrap:anywhere;border-bottom:2px solid var(--accent);padding-bottom:4px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
+.addr{margin:0;padding:8px 28px;border-radius:20px;background:var(--s1);border:1px solid var(--line)}
+.addr div{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--line)}
+.addr div:first-child{border-top:0}
+.addr dt{font-weight:700;font-size:15px}
+.addr dd{margin:0;color:var(--t2);font-size:15px}
+.addr dd span{display:block;font:500 13px var(--f-en);color:var(--t4);margin-top:2px}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+@media (max-width:480px){.addr{padding:4px 20px}.addr div{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- Footer ---------- */
+.ftr{border-top:1px solid var(--line);padding:28px 0 calc(28px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--t4)}
+.ftr .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
+.ftr .l{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.ftr .l img{height:20px;width:auto;opacity:.9}
+.ftr a:hover{color:#fff}
+.ftr label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ftr select{background:var(--s1);color:var(--t2);border:1px solid var(--line2);border-radius:8px;padding:9px 36px 9px 14px;font:600 12px var(--f-en);letter-spacing:.06em;appearance:none;-webkit-appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--t3) 50%),linear-gradient(135deg,var(--t3) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+
+/* 언어 전환 */
+.lang{display:flex;gap:6px;align-items:center;font:500 13px var(--f-en);color:var(--t4);margin-right:8px}
+.lang b{color:#fff;font-weight:600}.lang i{font-style:normal;opacity:.5}.lang a:hover{color:#fff}
+@media (max-width:900px){.hdr-cta .lang{display:none}}
+.nav{justify-content:center}
+
+
+/* ---------- 섹션 타이틀 가운데 정렬 ---------- */
+.sec-top{flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:24px}
+.sec-head-c{text-align:center}
+.were::before{background:rgba(0,0,0,.6)}
+.were .wrap{grid-template-columns:1fr;justify-items:center;text-align:center;align-items:start;gap:28px}
+.were .lead{margin-inline:auto}
+.team-card{grid-template-columns:1fr;justify-items:center;text-align:center}
+.team-card::after{background:rgba(0,0,0,.5)}
+
+/* ---------- Motion ---------- */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="VISIT 홈"><img src="../assets/img/logo_white.png" alt="VISIT"></a>
+    <nav class="nav" aria-label="주 메뉴">
+      <a href="#top">Main</a>
+      <a href="#about">Business</a>
+      <a href="#about">Shop</a>
+      <a href="#newsroom">Newsroom</a>
+      <a href="#team">Team</a>
+    </nav>
+    <div class="hdr-cta">
+      <span class="lang"><b>KR</b><i>/</i><a href="#top">EN</a></span>
+      <a class="btn btn-sm btn-white" href="#contact">1:1 문의</a>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
+  </div>
+</header>
+<nav class="mnav" aria-label="모바일 메뉴">
+  <a href="#top">Main</a><a href="#about">Business</a><a href="#about">Shop</a><a href="#newsroom">Newsroom</a><a href="#team">Team</a>
+</nav>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" aria-label="메인 비주얼">
+    <div id="pano" class="view360-container"><canvas class="view360-canvas"></canvas></div>
+    <div class="hero-veil"></div>
+    <div class="hud" aria-hidden="true"><span class="live">360° VIEW</span><br>HEADING <b id="hdg">000°</b></div>
+    <div class="hint gone" id="hint" aria-hidden="true">← 드래그해서 둘러보기 →</div>
+    <div class="hero-in">
+      <h1>모든 이동이 정보가 되는 곳,<br><em>VISIT</em></h1>
+      <p class="hero-sub">실내외 어디든, 내 걸음이 닿는 모든 공간을<br>실시간으로 빠르게, 360도로 다채롭게.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-white" href="https://roundpic.io/" target="_blank" rel="noopener">360VR 보러가기 <span class="arr">→</span></a>
+        <a class="btn btn-glass" href="#contact">문의하기</a>
+      </div>
+    </div>
+    <div class="seg scenes" role="group" aria-label="360 공간 선택">
+      <button type="button" data-scene="office-lounge" aria-pressed="true">공유 오피스</button>
+      <button type="button" data-scene="hotel" aria-pressed="false">호텔</button>
+      <button type="button" data-scene="camping" aria-pressed="false">캠핑장</button>
+      <button type="button" data-scene="gym" aria-pressed="false">헬스장</button>
+    </div>
+  </section>
+
+  <!-- LOGO STRIP -->
+  <div class="logos" aria-label="함께하는 고객사"><div class="row" id="logoRow"></div></div>
+
+  <!-- WE'RE -->
+  <section class="sec were" id="were">
+    <div class="wrap">
+      <div class="rv">
+        <p class="eyebrow">We're</p>
+        <h2 class="h-xl" style="margin-top:18px">공간과 데이터가<br>만나다.</h2>
+      </div>
+      <div class="rv">
+        <p class="lead">비지트는 공간을 다양한 데이터와 연계하여 새로운 공간정보의 가치를 창출해 내고자 합니다.</p>
+        <p class="lead">우리는 실내와 실외, 공간에 대한 경계를 허물어 다양한 정보를 제공할 수 있도록 도와주는 지도 제작 플랫폼을 제공하고 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="sec" id="about" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div><p class="eyebrow">About</p><h2 class="h-xl" style="margin-top:18px">유연하게<br>공간의 변화를 담다.</h2></div>
+        <div class="seg" role="tablist" aria-label="About 분야">
+          <button type="button" role="tab" id="t-biz" aria-controls="p-biz" aria-selected="true">Business</button>
+          <button type="button" role="tab" id="t-svc" aria-controls="p-svc" aria-selected="false" tabindex="-1">Service</button>
+          <button type="button" role="tab" id="t-tech" aria-controls="p-tech" aria-selected="false" tabindex="-1">Technology</button>
+        </div>
+      </div>
+
+      <div class="about-panels rv">
+        <div class="ap" role="tabpanel" id="p-biz" aria-labelledby="t-biz">
+          <div>
+            <span class="tag">Business</span>
+            <h3>공간 정보가 제공하는 가치</h3>
+            <p class="desc">비지트는 2018년, 공간정보가 주는 가치와 함께 시작합니다. 우리는 일상 속 빠른 변화를 공간의 제약 없이 정확하게 담아낼 수 있는 세상을 꿈꿉니다.</p>
+            <ul class="pts">
+              <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><div><b>실내·실외 통합 공간정보</b><span>건물 안팎을 하나로 잇는 지도 데이터</span></div></li>
+              <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M9 12.5 11 14.5 15.5 10"/><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6L12 3z"/></svg></span><div><b>국토교통부 스마트시티 인증</b><span>2022년, 국내 최초 민간 지도 공급 기업</span></div></li>
+            </ul>
+            <a class="more" href="#about">더보기 <span>→</span></a>
+          </div>
+          <div class="mock">
+            <div class="win">
+              <div class="win-bar"><i></i><i></i><i></i><span class="chip"><span class="dot"></span>Since 2018</span></div>
+              <div class="win-body"><img src="../assets/img/main/main.jpg" alt="" loading="lazy" style="object-position:40% 40%"></div>
+            </div>
+            <div class="float"><div class="t">작년도 대비 성장률</div><div class="v">130<small>%</small></div><div class="bar" style="--w:92%"><span></span></div></div>
+          </div>
+        </div>
+
+        <div class="ap" role="tabpanel" id="p-svc" aria-labelledby="t-svc" hidden>
+          <div>
+            <span class="tag">Service</span>
+            <h3>스마트폰만으로 제작 가능한 지도 제작 플랫폼</h3>
+            <p class="desc">스마트폰 하나만으로 누구나 360VR 촬영이 가능한 ‘라운드픽’ 서비스를 제공합니다. 한국, 싱가포르, 태국 3개국에 서비스를 런칭하였으며 다국어를 지원합니다.</p>
+            <ul class="pts">
+              <li><span class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/><circle cx="12" cy="10" r="3"/></svg></span><div><b>라운드픽 360VR 촬영</b><span>별도 장비 없이 스마트폰으로</span></div></li>
+              <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><div><b>Google Map 공식 Provider</b><span>촬영한 공간을 Google 지도에 연결</span></div></li>
+            </ul>
+            <a class="more" href="https://roundpic.io/" target="_blank" rel="noopener">라운드픽 바로가기 <span>→</span></a>
+          </div>
+          <div class="mock">
+            <div class="win">
+              <div class="win-bar"><i></i><i></i><i></i><span class="chip"><span class="dot"></span>RoundPic</span></div>
+              <div class="win-body"><img src="../assets/img/main/service.jpg" alt="" loading="lazy"></div>
+            </div>
+            <div class="float"><div class="t">서비스 국가</div><ul><li>대한민국 <b>2021</b></li><li>싱가포르 <b>2022</b></li><li>태국 <b>2023</b></li></ul></div>
+          </div>
+        </div>
+
+        <div class="ap" role="tabpanel" id="p-tech" aria-labelledby="t-tech" hidden>
+          <div>
+            <span class="tag">Technology</span>
+            <h3>특허 개발과 기술 확보를 위한 끊임없는 노력</h3>
+            <p class="desc">국내외 특허를 다량 보유하고 있는 비지트는 기업부설연구소에서 근무하는 전문 연구개발자들과 함께, AI 및 360 VR 기술을 개발하고 있습니다.</p>
+            <ul class="pts">
+              <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><div><b>국내외 기술 특허 28건</b><span>2025년 기준 등록 완료</span></div></li>
+              <li><span class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2.5v3.5M15 2.5v3.5M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/></svg></span><div><b>AI · 360 VR 연구개발</b><span>기업부설연구소 · TIPS 과제 선정</span></div></li>
+            </ul>
+            <a class="more" href="#about">더보기 <span>→</span></a>
+          </div>
+          <div class="mock">
+            <div class="win">
+              <div class="win-bar"><i></i><i></i><i></i><span class="chip ok"><span class="dot"></span>R&amp;D Lab</span></div>
+              <div class="win-body"><img src="../assets/img/main/tech.jpg" alt="" loading="lazy"></div>
+            </div>
+            <div class="float"><div class="t">등록 특허</div><div class="v">28<small>건</small></div><div class="bar" style="--w:70%"><span></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="sec" id="growth" style="padding-top:0">
+    <div class="wrap">
+      <div class="rv sec-head-c">
+        <p class="eyebrow">Growth</p>
+        <h2 class="h-xl" style="margin-top:18px">우리는 매일<br>새로운 내일을 만들어갑니다.</h2>
+      </div>
+      <div class="bento rv">
+        <div class="stat hero-stat"><span class="lbl">누적 콘텐츠</span><span class="v"><span class="cnt" data-to="1219" data-sep="1">1,219</span><small>만건</small></span><span class="d">2026 Q1</span></div>
+        <div class="stat"><span class="lbl">누적 투자금액</span><span class="v"><span class="cnt" data-to="11">11</span><small>억+</small></span><span class="d">2026 · 시리즈A 진행</span></div>
+        <div class="stat"><span class="lbl">작년도 대비 성장률</span><span class="v"><span class="cnt" data-to="130">130</span><small>%</small></span><span class="d">2026</span></div>
+        <div class="stat wide"><span class="lbl">국내 민간 지도 공급</span><span class="v kr">최초</span><span class="d">2022.08.19 · 국토부 스마트시티 인증기업 기준</span></div>
+      </div>
+      <div class="reach">
+        <div class="panel map rv">
+          <div class="panel-h"><h3>지원 국가</h3><span class="chip"><span class="dot"></span>3 Countries</span></div>
+          <svg viewBox="0 0 400 440" role="img" aria-label="지원 국가 지도: 한국, 싱가포르, 태국">
+            <defs>
+              <pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1" fill="rgba(255,255,255,.12)"/></pattern>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset=".3" stop-color="#ff023f"/><stop offset="1" stop-color="#ff8038"/></linearGradient>
+            </defs>
+            <rect width="400" height="440" fill="url(#dots)" rx="12"/>
+            <g fill="none" stroke="rgba(255,255,255,.14)" stroke-dasharray="3 5"><path d="M320 54 Q 230 120 55 292"/><path d="M320 54 Q 260 260 88 397"/></g>
+            <g fill="none" stroke="url(#g)" stroke-width="1.8" stroke-linecap="round"><path class="draw" pathLength="1" d="M320 54 Q 230 120 55 292"/><path class="draw" pathLength="1" d="M320 54 Q 260 260 88 397"/></g>
+            <g fill="#ff8038"><circle r="3.5"><animateMotion dur="3.2s" begin="2s" repeatCount="indefinite" path="M320 54 Q 230 120 55 292"/></circle><circle r="3.5"><animateMotion dur="3.6s" begin="2.4s" repeatCount="indefinite" path="M320 54 Q 260 260 88 397"/></circle></g>
+            <circle cx="320" cy="54" r="10" fill="none" stroke="#ff004d" stroke-width="1.5"><animate attributeName="r" values="6;22" dur="2s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".8;0" dur="2s" repeatCount="indefinite"/></circle>
+            <circle cx="320" cy="54" r="5" fill="#ff004d"/><circle cx="55" cy="292" r="5" fill="#fff"/><circle cx="88" cy="397" r="5" fill="#fff"/>
+            <g font-family="Poppins, sans-serif" fill="#fff">
+              <text x="300" y="88" text-anchor="end" font-size="14" font-weight="600" letter-spacing="1">KOREA</text>
+              <text x="300" y="102" text-anchor="end" font-size="10" fill="rgba(255,255,255,.4)">37.57°N 126.98°E</text>
+              <text x="70" y="286" font-size="14" font-weight="600" letter-spacing="1">THAILAND</text>
+              <text x="70" y="300" font-size="10" fill="rgba(255,255,255,.4)">13.76°N 100.50°E</text>
+              <text x="104" y="391" font-size="14" font-weight="600" letter-spacing="1">SINGAPORE</text>
+              <text x="104" y="405" font-size="10" fill="rgba(255,255,255,.4)">1.35°N 103.82°E</text>
+            </g>
+          </svg>
+        </div>
+        <div class="panel rv">
+          <div class="panel-h"><h3>연혁</h3><span class="eyebrow">2018 — 2026</span></div>
+          <ol class="tl" reversed>
+            <li><span class="y">2026</span><ul><li>1분기 공간 동선 분석 솔루션 샘플 개발 완료</li></ul></li>
+            <li><span class="y">2025</span><ul><li>지식재산유공 원주시 포상</li><li>도내 유망중소기업</li><li>Google Map 공식 Provider</li><li>국내외 기술 특허 28개 등록</li><li>25년 29.4억 매출</li></ul></li>
+            <li><span class="y">2023</span><ul><li>라운드픽 서비스 런칭 (태국)</li><li>SK플래닛 기술이전 무상양도</li><li>TIPS 과제 선정</li><li>IBK 구로 창공 10기 선정</li></ul></li>
+            <li><span class="y">2022</span><ul><li>국토교통부 스마트시티 인증</li><li>씨엔티테크 주식회사 투자 유치</li><li>라운드픽 서비스 런칭 (싱가포르)</li><li>싱가포르 법인 설립 (RoundPic Global Pte., Ltd.)</li></ul></li>
+            <li><span class="y">2021</span><ul><li>라운드픽 모바일/웹 공식 서비스 런칭 (국내)</li><li>한국관광공사, 성장 관광벤처 2위</li><li>문화체육관광부, 관광벤처기업 인증</li><li>CNH, Marvel IP 전시분야 라이선스 독점 계약</li></ul></li>
+            <li><span class="y">2020</span><ul><li>한국관광공사, 초기 관광벤처 2위</li><li>Nest VC. (Hong Kong) 투자 유치</li><li>KICC (NIPA SG), Sales-rep 선정</li><li>광운대학교, ICT 학점연계 인턴쉽 프로젝트</li></ul></li>
+            <li><span class="y">2019</span><ul><li>주식회사 비지트로 사명 변경</li><li>기업부설연구소 설립</li><li>삼성전자 기술이전 무상양도</li><li>벤처기업 인증</li></ul></li>
+            <li><span class="y">2018</span><ul><li>유한회사 튜리플 설립 (주식회사 튜리플)</li><li>한양대학교 기술지주회사 투자 유치</li><li>(Hongkong) Swire properties 독점계약</li><li>창업진흥원, 창업선도대학 수행</li></ul></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCE -->
+  <section class="sec ref" id="reference" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div><p class="eyebrow">Reference</p><h2 class="h-xl" style="margin-top:18px">국내외 다양한 기업들이<br>VISIT와 함께합니다.</h2></div>
+        <a class="more" href="#reference">더보기 <span>→</span></a>
+      </div>
+    </div>
+    <div class="marq" aria-label="고객사 로고">
+      <div class="row" id="row1"></div>
+      <div class="row rev" id="row2"></div>
+    </div>
+  </section>
+
+
+  <section class="sec" id="newsroom" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-top rv">
+        <div><p class="eyebrow">Newsroom</p><h2 class="h-xl" style="margin-top:18px">VISIT의<br>최신 소식을 공유합니다.</h2></div>
+        <a class="more" href="#newsroom">더보기 <span>→</span></a>
+      </div>
+      <div class="ncards" id="ncards"></div>
+      <ul class="nlist rv" id="nlist"></ul>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team" class="wrap">
+    <div class="team-card rv">
+      <div><p class="eyebrow">Team</p><h2 class="h-xl" style="margin-top:18px">비지트가 추구하는 가치와 함께<br>성장할 당신을 기다리고 있습니다.</h2></div>
+      <a class="btn btn-white" href="#team">더보기 <span class="arr">→</span></a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec contact" id="contact">
+    <div class="wrap">
+      <div class="rv">
+        <p class="eyebrow">Contact</p>
+        <a class="mail" href="mailto:info@visitinc.kr">info@visitinc.kr</a>
+        <div class="ctas">
+          <a class="btn btn-accent" href="mailto:info@visitinc.kr">1:1 문의하기 <span class="arr">→</span></a>
+          <a class="btn btn-glass" href="https://roundpic.io/" target="_blank" rel="noopener">360VR 보러가기 <span class="arr">→</span></a>
+        </div>
+      </div>
+      <dl class="addr rv">
+        <div><dt>본사</dt><dd>강원특별자치도 원주시 지정면 신평석화로 236-1, 1동<span>(26358)</span></dd></div>
+        <div><dt>기업부설연구소</dt><dd>서울 영등포구 여의도동 여의대로 8, A2002호<span>(07320)</span></dd></div>
+        <div><dt>싱가폴 법인</dt><dd>1 Raffles Place, #20-02 One Raffles Place, Singapore<span>(048616)</span></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="l"><img src="../assets/img/logo_gray.png" alt="VISIT"><a href="#contact">개인정보 처리방침</a><span class="en">© 2026 VISIT Inc.</span></div>
+    <div><label for="family">패밀리 사이트</label>
+      <select id="family">
+        <option value="">FAMILY SITE</option>
+        <option value="https://gwba.co.kr/">강원상생기업연합회</option>
+        <option value="https://www.make-works.kr/">make-works</option>
+        <option value="https://privatepark.co.kr/">privatepark</option>
+        <option value="https://www.camp360v.com/">camp360v</option>
+        <option value="https://roadon.co.kr/">로드온</option>
+        <option value="https://rankingfish.com/">랭킹피쉬</option>
+      </select>
+    </div>
+  </div>
+</footer>
+
+
+<script src="../assets/pano-interior.js"></script>
+<script src="https://unpkg.com/@egjs/view360@4.0.0-beta.7/dist/view360.pkgd.min.js"></script>
+<script>
+const NEWS=[
+ ["2026.11.20","비지트, 싱가포르 전시 디자인 기업 MANMANHAN과 MOU 체결","https://www.sisunnews.co.kr/news/articleView.html?idxno=250201","../assets/img/news/69.jpg"],
+ ["2026.11.06","비지트, 싱가포르 ‘ITB Asia 2026’ 참가… 360VR·로봇 기반 공간정보 기술 선보여","https://www.sisunnews.co.kr/news/articleView.html?idxno=249282","../assets/img/news/68.jpg"],
+ ["2026.09.29","비지트, DRT 송출·KW-PASS 앱 결합 참여형 관광 프로그램 운영","https://www.sisunnews.co.kr/news/articleView.html?idxno=246798","../assets/img/news/67.jpg"],
+ ["2026.09.17","강원대학교 ‘강원 벤처투자 포럼 2026’ 개최","https://www.pressian.com/pages/articles/2026091713470892240"],
+ ["2026.09.08","비지트, 강원대기술지주·트리거투자파트너스 등과 시리즈A 투자 계약","https://www.bizwnews.com/news/articleView.html?idxno=145645"],
+ ["2026.07.27","강원상생기업연합회, 지역 투자기관 모여 생태계 활성화 논의","https://www.sisunnews.co.kr/news/articleView.html?idxno=243143"],
+ ["2026.07.27","강원상생기업연합회 강쎈 나오리그 3사, 중견기업 글로벌 진출 지원 업무협약","https://vibetimes.co.kr/news/cmryo037f1bga6wsvu7csk2uq"]
+];
+const LOGOS=[1,2,3,4,5,6].map(i=>`../assets/img/logo_${i}.png`);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Reference 로고 마퀴
+function fillLogos(id,list){const h=list.map(s=>`<div class="logo-chip"><img src="${s}" alt="고객사 로고" loading="lazy"></div>`).join('');document.getElementById(id).innerHTML=h+h+h;}
+fillLogos('row1',LOGOS);
+const lh=LOGOS.map(x=>`<img src="${x}" alt="고객사 로고" loading="lazy">`).join('');document.getElementById('logoRow').innerHTML=lh+lh+lh+lh;fillLogos('row2',LOGOS.slice(3).concat(LOGOS.slice(0,3)));
+
+// 뉴스
+const nc=document.getElementById('ncards'),nl=document.getElementById('nlist');
+NEWS.slice(0,3).forEach(n=>nc.insertAdjacentHTML('beforeend',`<a class="ncard rv" href="${n[2]}" target="_blank" rel="noopener"><div class="th"><img src="${n[3]}" alt="" loading="lazy"></div><div class="bd"><div class="meta"><span class="chip"><span class="dot"></span>Newsroom</span><span>${n[0]}</span></div><h3>${n[1]}</h3></div></a>`));
+NEWS.slice(3).forEach(n=>nl.insertAdjacentHTML('beforeend',`<li><a href="${n[2]}" target="_blank" rel="noopener"><span class="dt">${n[0]}</span><span class="tt">${n[1]}</span><span class="ar">→</span></a></li>`));
+
+document.getElementById('family').addEventListener('change',e=>{if(e.target.value)window.open(e.target.value,'_blank','noopener');e.target.value='';});
+
+// 헤더
+const hdr=document.getElementById('hdr'),burger=document.getElementById('burger');
+const onScroll=()=>hdr.classList.toggle('solid',scrollY>20||document.body.classList.contains('menu-open'));
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+const setMenu=o=>{document.body.classList.toggle('menu-open',o);burger.setAttribute('aria-expanded',o);burger.setAttribute('aria-label',o?'메뉴 닫기':'메뉴 열기');onScroll();};
+burger.addEventListener('click',()=>setMenu(!document.body.classList.contains('menu-open')));
+document.querySelectorAll('.mnav a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+
+// About 탭
+(function(){
+  const tabs=[...document.querySelectorAll('[role="tab"]')];
+  const select=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;
+    const p=document.getElementById(x.getAttribute('aria-controls'));p.hidden=!on;p.classList.toggle('show',on);});};
+  tabs.forEach((t,i)=>{t.addEventListener('click',()=>select(t));
+    t.addEventListener('keydown',e=>{const d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;const n=tabs[(i+d+tabs.length)%tabs.length];n.focus();select(n);});});
+})();
+
+// 등장 + 카운터 + 지도
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.rv,.map').forEach(el=>io.observe(el));
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);if(reduce)return;
+  const el=e.target,to=+el.dataset.to,sep=el.dataset.sep,t0=performance.now(),D=1400;
+  (function f(t){const p=Math.min(1,(t-t0)/D),v=Math.round(to*(1-Math.pow(1-p,3)));el.textContent=sep?v.toLocaleString('en-US'):v;if(p<1)requestAnimationFrame(f);})(t0);
+}),{threshold:.6});
+document.querySelectorAll('.cnt').forEach(el=>cio.observe(el));
+
+// HERO 360
+(function(){
+  const el=document.getElementById('pano'),hdg=document.getElementById('hdg'),hint=document.getElementById('hint');
+  const scenes=document.querySelectorAll('.scenes button');
+  if(!window.View360||!window.VISIT_PANOS){document.querySelector('.scenes').hidden=true;return;}
+  const proj=key=>new View360.EquirectProjection({src:window.VISIT_PANOS[key]});
+  const START_YAW={gym:180};let nextYaw=null;
+  try{
+    const viewer=new View360(el,{projection:proj('office-lounge'),initialYaw:0,initialPitch:-4,fov:innerWidth<700?95:105,
+      pitchRange:{min:-60,max:45},zoom:false,wheelScrollable:true,scrollable:true,gyro:false,useGrabCursor:true,
+      autoplay:reduce?false:{delay:1800,speed:.4,pauseOnHover:false,canInterrupt:true}});
+    viewer.on('ready',()=>{el.classList.add('ready');hint.classList.remove('gone');setTimeout(()=>hint.classList.add('gone'),4500);});
+    viewer.on('viewChange',()=>{const d=((viewer.camera.yaw%360)+360)%360;hdg.textContent=String(Math.round(d)%360).padStart(3,'0')+'°';});
+    viewer.on('inputStart',()=>hint.classList.add('gone'));
+    viewer.on('load',()=>{if(nextYaw!==null){viewer.camera.lookAt({yaw:nextYaw,pitch:-4});nextYaw=null;}});
+    scenes.forEach(b=>b.addEventListener('click',()=>{
+      if(b.getAttribute('aria-pressed')==='true')return;
+      scenes.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+      nextYaw=START_YAW[b.dataset.scene]||0;viewer.load(proj(b.dataset.scene));
+    }));
+  }catch(err){console.warn('View360 init failed',err);}
+})();
+</script>
+</body>
+</html>
