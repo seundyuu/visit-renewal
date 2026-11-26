@@ -37,7 +37,7 @@ document.documentElement.classList.add('js');
       const home=page()==='home'?'#top':'./';
       put(`<header class="hdr" id="hdr">
   <div class="wrap">
-    <a href="${home}" class="logo" aria-label="VISIT 홈"><img src="../assets/img/logo_white.png" alt="VISIT"></a>
+    <a href="${home}" class="logo" aria-label="VISIT 홈"><img src="../assets/img/${document.body.classList.contains('lt')?'logo.png':'logo_white.png'}" alt="VISIT"></a>
     <nav class="nav" aria-label="주 메뉴">${links()}</nav>
     <div class="hdr-cta">
       <span class="lang"><b>KR</b><i>/</i><a href="${home}">EN</a></span>
@@ -54,17 +54,16 @@ document.documentElement.classList.add('js');
     <div class="rv">
       <p class="eyebrow">Contact</p>
       <a class="mail" href="mailto:info@visitinc.kr">info@visitinc.kr</a>
-      <div class="ctas">
-        <a class="btn btn-accent" href="${CONTACT}">1:1 문의하기 <span class="arr">→</span></a>
-        <a class="btn btn-glass" href="https://roundpic.io/" target="_blank" rel="noopener">360VR 보러가기 <span class="arr">→</span></a>
-        <a class="btn btn-line" href="${IR}" target="_blank" rel="noopener">회사 소개서 <span class="arr">↓</span></a>
-      </div>
     </div>
     <dl class="addr rv">
       <div><dt>본사</dt><dd>강원특별자치도 원주시 지정면 신평석화로 236-1, 1동<span>(26358)</span></dd></div>
       <div><dt>기업부설연구소</dt><dd>서울 영등포구 여의도동 여의대로 8, A2002호<span>(07320)</span></dd></div>
       <div><dt>싱가폴 법인</dt><dd>1 Raffles Place, #20-02 One Raffles Place, Singapore<span>(048616)</span></dd></div>
     </dl>
+    <div class="etc rv">
+      <a href="${IR}" target="_blank" rel="noopener"><span class="ic"><img src="../assets/img/doc_icon.png" alt=""></span><span><b>회사 소개서</b><small>다운로드하기</small></span></a>
+      <a href="${CONTACT}"><span class="ic"><img src="../assets/img/qa_icon.png" alt=""></span><span><b>1:1 문의하기</b><small>제휴 문의하기</small></span></a>
+    </div>
   </div>
 </section>`);
     },
